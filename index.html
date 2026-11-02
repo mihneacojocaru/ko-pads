@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KO·PADS – Proof of Concept | mc-creative</title>
+  <meta name="description" content="Neumorphismus-Experiment von Mihnea Cojocaru: ein spielbarer Mini-Sampler im Hardware-Look, gebaut mit HTML, CSS und Web Audio.">
+  <meta name="author" content="Mihnea Cojocaru">
+  <link rel="canonical" href="https://mihneacojocaru.github.io/ko-pads/">
+  <link rel="author" href="https://mc-creative.de">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#ededed">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="mc-creative">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="KO·PADS – Proof of Concept">
+  <meta property="og:description" content="Neumorphismus macht aus Licht und Schatten Tasten, die man schon fühlt, bevor man sie berührt.">
+  <meta property="og:url" content="https://mihneacojocaru.github.io/ko-pads/">
+  <meta property="og:image" content="https://mihneacojocaru.github.io/ko-pads/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KO·PADS – Proof of Concept">
+  <meta name="twitter:description" content="Neumorphismus macht aus Licht und Schatten Tasten, die man schon fühlt, bevor man sie berührt.">
+  <meta name="twitter:image" content="https://mihneacojocaru.github.io/ko-pads/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "KO·PADS – Proof of Concept",
+    "description": "Spielbarer Mini-Sampler im Hardware-Look, gebaut mit HTML, CSS und Web Audio.",
+    "url": "https://mihneacojocaru.github.io/ko-pads/",
+    "image": "https://mihneacojocaru.github.io/ko-pads/og-image.png",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "de",
+    "author": {
+      "@type": "Person",
+      "name": "Mihnea Cojocaru",
+      "url": "https://mc-creative.de",
+      "jobTitle": "Full-Stack-Entwickler"
+    },
+    "publisher": { "@type": "Organization", "name": "mc-creative", "url": "https://mc-creative.de" }
+  }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="home" href="https://mc-creative.de" rel="author">MC-CREATIVE.DE</a>
+  </header>
+  <main class="stage">
+    <h1 class="title">KO·PADS – Proof of Concept <span class="title_sub">Neumorphismus macht aus Licht und Schatten Tasten, die man schon fühlt, bevor man sie berührt.</span></h1>
+    <div class="scene">
+      <div class="rig" id="rig">
+        <div class="floor" aria-hidden="true"></div>
+        <section class="device" aria-label="Sampler">
+          <i class="screw screw-tl"></i><i class="screw screw-tr"></i><i class="screw screw-bl"></i><i class="screw screw-br"></i>
+
+          <header class="top">
+            <div class="speaker" aria-hidden="true"></div>
+            <div class="lcd" aria-live="polite">
+              <div class="lcd_icons">
+                <span id="icon-play">▶ PLAY</span>
+                <span id="icon-rec">● REC</span>
+                <span id="icon-group" class="is-on">GRP A</span>
+                <span id="icon-vol" class="is-on">VOL 7</span>
+              </div>
+              <div class="lcd_main"><span id="readout">PRESS PLAY</span></div>
+              <div class="lcd_foot">
+                <span id="bar">BAR -</span>
+                <div class="lcd_steps" id="steps"></div>
+              </div>
+            </div>
+          </header>
+
+          <div class="brandline">
+            <span class="brand">KO·PADS</span>
+            <span class="print">PS-12 · POCKET SAMPLER · 12 PADS · 4 GROUPS</span>
+          </div>
+
+          <div class="deck">
+            <div class="column">
+              <span class="print print-head">GROUP</span>
+              <div class="stack" id="groups"></div>
+            </div>
+            <div class="column">
+              <span class="print print-head">SOUND</span>
+              <div class="pads" id="pads"></div>
+            </div>
+            <div class="column">
+              <span class="print print-head">FX</span>
+              <div class="knobs">
+                <div class="knob" data-knob="filter" tabindex="0" role="slider" aria-label="Filter" aria-valuemin="0" aria-valuemax="100">
+                  <div class="knob_cap"></div>
+                  <span class="print">X · FILTER</span>
+                </div>
+                <div class="knob" data-knob="pitch" tabindex="0" role="slider" aria-label="Pitch" aria-valuemin="0" aria-valuemax="100">
+                  <div class="knob_cap"></div>
+                  <span class="print">Y · PITCH</span>
+                </div>
+                <div class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="transport">
+            <div class="transport_group">
+              <span class="print print-head">VOLUME</span>
+              <div class="row">
+                <div class="btn"><button class="key" data-action="down" aria-label="Leiser">
+                  <svg viewBox="0 -960 960 960" class="icon"><path d="M200-440v-80h560v80H200Z"/></svg>
+                </button></div>
+                <div class="btn"><button class="key" data-action="up" aria-label="Lauter">
+                  <svg viewBox="0 -960 960 960" class="icon"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+                </button></div>
+              </div>
+            </div>
+            <div class="transport_group">
+              <span class="print print-head">SEQUENCE</span>
+              <div class="row">
+                <div class="btn"><button class="key" data-action="erase"><span class="key_label">ERASE</span></button></div>
+                <div class="btn"><button class="key key-record" data-action="record"><span class="key_label">RECORD</span></button></div>
+                <div class="btn"><button class="key key-dark" data-action="play"><span class="key_label">PLAY</span></button></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <button class="info" popovertarget="about" aria-label="Info">i</button>
+    <div class="about" id="about" popover>
+      <p><strong>KO·PADS</strong> ist inspiriert vom Teenage Engineering EP-133 K.O. II.</p>
+      <p>Tastatur: <kbd>0</kbd>–<kbd>9</kbd>, <kbd>.</kbd>, <kbd>Enter</kbd> Pads · <kbd>A</kbd>–<kbd>D</kbd> Group · <kbd>Leertaste</kbd> Play · <kbd>R</kbd> Record · <kbd>E</kbd> Erase. Regler ziehen oder scrollen, Doppelklick setzt zurück.</p>
+    </div>
+  </main>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
